@@ -7,7 +7,7 @@
     "node": "6.10.0"
   },
   "scripts": {
-    "lint": "stylelint *.css **/*.css && eslint .",
+    "lint": "stylelint *.pcss **/*.pcss && eslint .",
     "test": "npm run lint",
     "start": "node ./backend/server.js",
     "build": "if-env NODE_ENV=production  && npm run start:prod || npm run start:dev",
@@ -38,10 +38,9 @@
     "css-loader": "^0.26.1",
     "debug": "~2.6.0",
     "eslint": "3.7.0",
-    "eslint-config-hrundel": "latest",
     "eslint-config-standard-jsx": "3.3.0",
     "eslint-loader": "1.6.3",
-    "eslint-plugin-react": "6.10.0",
+    "eslint-plugin-react": "^6.10.0",
     "express": "~4.14.1",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.0",
@@ -64,7 +63,7 @@
     "serve-favicon": "~2.3.2",
     "start-webpack-dev-server-hot": "^0.1.0",
     "style-loader": "^0.13.1",
-    "stylelint": "7.3.1",
+    "stylelint": "^7.8.0 ",
     "webpack": "^2.2.1"
   },
   "devDependencies": {
@@ -72,7 +71,7 @@
     "compression": "^1.6.2",
     "if-env": "^1.0.0",
     "redux-devtools": "^3.3.2",
-    "stylelint-config-hrundel": "1.0.3",
+    "stylelint-config-standard": "^16.0.0",
     "webpack-dev-server": "^2.3.0"
   }
 }

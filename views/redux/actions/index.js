@@ -49,3 +49,14 @@ export function getCity(cityFilter) {
     }
 }
 
+import { CHACK_LENGTH } from '../constant/validation';
+
+export function checkLenght(length) {
+    return {
+        type: CHACK_LENGTH,
+        lenght: length
+    }
+}
+
+
+

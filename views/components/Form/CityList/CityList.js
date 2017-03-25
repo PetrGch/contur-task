@@ -1,18 +1,8 @@
-function sortCity(a, b) {
-    return a.City - b.City;
-}
-
 export default class CityList extends React.Component {
     render() {
-        let filter = this.props.filter;
-        let city = this.props.city;
+        let { city, cityLength } = this.props;
 
-        let citysList = city.filter((item) => {
-            let inputData = item.City.toLowerCase().trim();
-            let inputFilter = filter.toLowerCase().trim();
-            return inputData.startsWith(inputFilter) && inputFilter !== '';
-        }).sort(sortCity).map((item, index) => {
-
+        let citysList = city.map((item, index) => {
             return (
                 <li key={item.Id} className={index === 0 ? 'list__item list__item_active' : 'list__item'} >
                     <span>{item.City}</span>
@@ -22,12 +12,22 @@ export default class CityList extends React.Component {
 
         return (
             <div className='list-wrap'>
-                <ul className='list'>
+                <ul className={citysList.length !== 0 ? 'list' : 'list list_display-none'}>
                     {citysList}
                 </ul>
-                <div className='list-message'>
-                    <span>Показанно {citysList.length >= 7 ? 7: citysList.length} из {citysList.length} найденых
+                <div className={cityLength ? 'list-message list-message_display-none' : 'list-message'}>
+                    <span className={
+                        citysList.length !== 0 ?
+                            'list-message__item list-message__item_search' :
+                            'list-message__item list-message__item_search-none'
+                    }
+                    >Показанно {citysList.length >= 7 ? 7: citysList.length} из {citysList.length} найденых
                         городов. Уточните запрос, чтобы увидетьостальные</span>
+                    <span className={
+                        citysList.length === 0 ?
+                            'list-message__item list-message__item_notfound' :
+                            'list-message__item list-message__item_notfound-none'
+                    }>Не найдено</span>
                 </div>
             </div>
         );
@@ -35,6 +35,6 @@ export default class CityList extends React.Component {
 }
 
 CityList.propTypes = {
-   filter: React.PropTypes.string,
-   city: React.PropTypes.array
+   city: React.PropTypes.array.isRequired,
+   cityLength: React.PropTypes.bool.isRequired
 };

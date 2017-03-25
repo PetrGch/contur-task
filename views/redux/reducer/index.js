@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { GET_CITY_REQUEST, GET_CITY_SUCCESS, GET_CITY_ERROR } from '../constant/city';
 import { SET_SPINNER } from '../constant/spinner';
+import checkLenght from './validation';
 
 const initialState = {
     city: [],
@@ -10,6 +11,19 @@ const initialState = {
     error: false,
     success: false
 };
+
+function sortCity(a, b) {
+    return a.City - b.City;
+}
+
+function filterCity(cityList, filterValue) {
+    let city = JSON.parse(cityList);
+    return city.filter((item) => {
+        let inputData = item.City.toLowerCase().trim();
+        let inputFilter = filterValue.toLowerCase().trim();
+        return inputData.startsWith(inputFilter) && inputFilter !== '';
+    }).sort(sortCity);
+}
 
 function getCity(state = initialState, action) {
     switch (action.type) {
@@ -24,7 +38,7 @@ function getCity(state = initialState, action) {
             });
         case GET_CITY_SUCCESS:
             return Object.assign({}, state, {
-                city: JSON.parse(action.city),
+                city: filterCity(action.city, state.filter),
                 isFetching: false,
                 success: true,
                 dropDownList: action.city.length !== 0 && state.filter !== '' && /^[а-яА-Я0-9]+$/.test(state.filter)
@@ -39,6 +53,7 @@ function getCity(state = initialState, action) {
 }
 
 export default combineReducers({
-    getCity
+    getCity,
+    checkLenght
 });
 

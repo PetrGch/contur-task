@@ -16,8 +16,28 @@
         }
     }
 
+    &_display-none {
+        display: none;
+    }
+
     &-message {
         padding: 10px;
         color: $listText;
+
+        &__item {
+            display: block;
+
+            &_search,
+            &_notfound{
+
+                &-none {
+                    display: none;
+                }
+            }
+        }
+
+        &_display-none {
+            display: none;
+        }
     }
 }

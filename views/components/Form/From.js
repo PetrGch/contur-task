@@ -1,6 +1,6 @@
 import CityList from './CityList/CityList';
 
-const SetSpinner = (props) => {
+const SetSpinner = () => {
     return (
         <img
           src='./source/img/loader_spinner.gif'
@@ -22,15 +22,22 @@ export default class Form extends React.Component {
 
     render() {
         let inputData;
-        const { getCity } = this.props.pageActions;
+        const { getCity, checkLenght } = this.props.pageActions;
         const { city, dropDownList, isFetching, filter, error } = this.props.getCity;
-
+        const { length } = this.props.checkLenght;
+        console.log(length);
         return (
             <form className='form' onSubmit={this.handleSubmit}>
-                <div className='form__input'>
+                <div className={length ? 'form__input form__input_focus-error' : 'form__input'}>
                     <input
                       onChange={() => {
                           getCity(inputData.value);
+                      }}
+                      onBlur={() => {
+                          checkLenght(city.length === 0 && filter !== '');
+                      }}
+                      onFocus={() => {
+                          checkLenght(false);
                       }}
                       type='text'
                       placeholder='Начните ввод кода или названия'
@@ -42,8 +49,8 @@ export default class Form extends React.Component {
                     }
 
                 </div>
-                <div className={dropDownList ? 'form__list' : 'form__list form__list_display-none'}>
-                    <CityList filter={filter} city={city} />
+                <div className={(dropDownList && !length) ? 'form__list' : 'form__list form__list_display-none'}>
+                    <CityList city={city} cityLength={length} />
                 </div>
                 <div className={error ? 'form__error' : 'form__error form__error_display-none'}>
                     <span>Что-то пошло не так. Проверьте соединение с интернетом и попробуйте снова</span>
@@ -53,6 +60,7 @@ export default class Form extends React.Component {
                       }}
                     >Обновить</button>
                 </div>
+                <span className={length ? 'form__blur' : 'form__blur form__blur_display-none'}>Выберите значение из списка</span>
             </form>
         );
     }
@@ -60,5 +68,6 @@ export default class Form extends React.Component {
 
 Form.propTypes = {
     pageActions: React.PropTypes.object.isRequired,
-    getCity: React.PropTypes.object.isRequired
+    getCity: React.PropTypes.object.isRequired,
+    checkLenght: React.PropTypes.object.isRequired
 };

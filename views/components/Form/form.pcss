@@ -12,6 +12,19 @@
             padding: 4px 30px 4px 10px;
             box-sizing: border-box;
 
+            &:focus::-webkit-input-placeholder { /* WebKit browsers */
+                color: $placeholder;
+            }
+            &:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                color: $placeholder;
+            }
+            &:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+                color: $placeholder;
+            }
+            &:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
+                color: $placeholder;
+            }
+
             &:focus {
                 border: 2px solid $outline;
             }
@@ -32,7 +45,8 @@
 
     &__list {
         width: 100%;
-        max-height: 260px;
+        min-height: 200px;
+        max-height: 450px;
         overflow-y: auto;
         overflow-x: hidden;
         border: 1px solid $gray;

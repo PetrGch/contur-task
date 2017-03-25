@@ -20,7 +20,7 @@ function getCity(state = initialState, action) {
             });
         case SET_SPINNER:
             return Object.assign({}, state, {
-                isFetching: !state.success && action.spinner
+                isFetching: !state.success && action.spinner && !state.error && state.filter !== ''
             });
         case GET_CITY_SUCCESS:
             return Object.assign({}, state, {
@@ -31,7 +31,7 @@ function getCity(state = initialState, action) {
             });
         case GET_CITY_ERROR:
             return Object.assign({}, state, {
-                error: action.error
+                error: action.error && state.filter !== ''
             });
         default:
             return state

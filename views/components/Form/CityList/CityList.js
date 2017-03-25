@@ -1,38 +1,35 @@
+function sortCity(a, b) {
+    return a.City - b.City;
+}
+
 export default class CityList extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.filterCity = this.filterCity.bind(this);
-    }
-
-    filterCity(filterValue, data) {
-        let citysList = data.filter((item) => {
-            let inputData = item.City.toLowerCase().trim();
-            let inputFilter = filterValue.toLowerCase().trim();
-            if (inputData.startsWith(filterValue.toLowerCase()) && inputFilter !== '') {
-                return true;
-            }
-
-            return false;
-        }).map((item) => {
-            return (
-                    <li key={item.Id} className='list__item'>
-                        <span>{item.City}</span>
-                    </li>
-                )
-        });
-
-        return citysList;
-    }
-
     render() {
         let filter = this.props.filter;
         let city = this.props.city;
 
+        let citysList = city.filter((item) => {
+            let inputData = item.City.toLowerCase().trim();
+            let inputFilter = filter.toLowerCase().trim();
+            return inputData.startsWith(inputFilter) && inputFilter !== '';
+        }).sort(sortCity).map((item, index) => {
+
+            return (
+                <li key={item.Id} className={index === 0 ? 'list__item list__item_active' : 'list__item'} >
+                    <span>{item.City}</span>
+                </li>
+            )
+        });
+
         return (
-            <ul className='list'>
-                {this.filterCity(filter, city)}
-            </ul>
+            <div className='list-wrap'>
+                <ul className='list'>
+                    {citysList}
+                </ul>
+                <div className='list-message'>
+                    <span>Показанно {citysList.length >= 7 ? 7: citysList.length} из {citysList.length} найденых
+                        городов. Уточните запрос, чтобы увидетьостальные</span>
+                </div>
+            </div>
         );
     }
 }

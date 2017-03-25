@@ -45,13 +45,41 @@
 
     &__list {
         width: 100%;
-        min-height: 200px;
-        max-height: 450px;
-        overflow-y: auto;
-        overflow-x: hidden;
+        height: 284px;
+        overflow: hidden;
         border: 1px solid $gray;
         box-shadow: 0 2px 10px rgba(0,0,0,.2);
         background-color: $white;
+
+        &_display-none {
+            display: none;
+        }
+    }
+
+    &__error {
+        width: 100%;
+        height: 80px;
+        overflow: hidden;
+        border: 1px solid $gray;
+        box-shadow: 0 2px 10px rgba(0,0,0,.2);
+        background-color: $white;
+
+        & span {
+            display: block;
+            margin: 10px;
+            line-height: 1.2;
+            color: $listText;
+        }
+
+        & button {
+            width: 100%;
+            height: 28px;
+            border: none;
+            background-color: $bluehover;
+            cursor: pointer;
+            text-align: left;
+            color: $white;
+        }
 
         &_display-none {
             display: none;

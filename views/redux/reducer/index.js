@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { GET_CITY_REQUEST, GET_CITY_SUCCESS, GET_CITY_ERROR } from '../constant/city';
-import { SET_SPINNER, REMOVER_SPINNER } from '../constant/spinner';
+import { SET_SPINNER } from '../constant/spinner';
 
 const initialState = {
     city: [],
@@ -27,7 +27,7 @@ function getCity(state = initialState, action) {
                 city: JSON.parse(action.city),
                 isFetching: false,
                 success: true,
-                dropDownList: action.city.length !== 0 && state.filter !== ''
+                dropDownList: action.city.length !== 0 && state.filter !== '' && /^[а-яА-Я0-9]+$/.test(state.filter)
             });
         case GET_CITY_ERROR:
             return Object.assign({}, state, {
@@ -35,15 +35,6 @@ function getCity(state = initialState, action) {
             });
         default:
             return state
-    }
-}
-
-function setSpinner(state = initialState, action) {
-    switch (action.type) {
-        case SET_SPINNER:
-            return Object.assign({}, state, {
-
-            })
     }
 }
 

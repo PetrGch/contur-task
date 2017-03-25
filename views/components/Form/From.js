@@ -15,7 +15,6 @@ export default class Form extends React.Component {
         const { getCity } = this.props.pageActions;
         const { city, dropDownList, isFetching, filter, error } = this.props.getCity;
 
-        console.log(isFetching);
         return (
             <form className='form'>
                 <div className='form__input'>

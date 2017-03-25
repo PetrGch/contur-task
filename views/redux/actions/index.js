@@ -1,5 +1,5 @@
 import { GET_CITY_REQUEST, GET_CITY_SUCCESS, GET_CITY_ERROR } from '../constant/city';
-import { SET_SPINNER, REMOVER_SPINNER } from '../constant/spinner';
+import { SET_SPINNER } from '../constant/spinner';
 
 export function getCity(cityFilter) {
     return (dispatch) => {

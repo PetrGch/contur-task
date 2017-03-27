@@ -12,16 +12,19 @@
             padding: 4px 30px 4px 10px;
             box-sizing: border-box;
 
-            &:focus::-webkit-input-placeholder { /* WebKit browsers */
+            &:focus::-webkit-input-placeholder {
                 color: $placeholder;
             }
-            &:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+
+            &:focus:-moz-placeholder {
                 color: $placeholder;
             }
-            &:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+
+            &:focus::-moz-placeholder {
                 color: $placeholder;
             }
-            &:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
+
+            &:focus:-ms-input-placeholder {
                 color: $placeholder;
             }
 
@@ -31,11 +34,9 @@
         }
 
         &_focus-error {
-
             & input {
                 border: 2px solid $blurError;
             }
-
         }
 
         &-spinner {
@@ -55,7 +56,7 @@
         width: 100%;
         overflow: hidden;
         border: 1px solid $gray;
-        box-shadow: 0 2px 10px rgba(0,0,0,.2);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         background-color: $white;
 
         &_display-none {
@@ -68,7 +69,7 @@
         height: 80px;
         overflow: hidden;
         border: 1px solid $gray;
-        box-shadow: 0 2px 10px rgba(0,0,0,.2);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         background-color: $white;
 
         & span {

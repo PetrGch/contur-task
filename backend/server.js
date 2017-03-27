@@ -10,29 +10,21 @@ const appRoot = require('app-root-path');
 
 //routers
 const index = require('./routes/index');
+const city = require('./routes/city');
 
 const app = express();
 
 // view engine setup
-app.set('views', path.join(appRoot.path, 'views/error'));
+app.set('views', path.join(appRoot.path, '/views/components/error'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 app.get('/', index);
-
-// app.use('/submit', function(req, res, next) {
-//     req.on('readable', function() {
-//         var data;
-//         if (null != (data = req.read())) {
-//             console.log(data.toString());
-//         }
-//     });
-//     res.end('hi');
-// });
+app.get('/city', city);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

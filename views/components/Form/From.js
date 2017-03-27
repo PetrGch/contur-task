@@ -3,7 +3,7 @@ import CityList from './CityList/CityList';
 const SetSpinner = () => {
     return (
         <img
-          src='./source/img/loader_spinner.gif'
+          src='img/loader_spinner.gif'
           alt='loader spiner'
           className='form__input-spinner' />
     )
@@ -22,26 +22,38 @@ export default class Form extends React.Component {
 
     render() {
         let inputData;
-        const { getCity, checkLenght } = this.props.pageActions;
+        const { getCity, checkLenght, selectCity, setCityActive } = this.props.pageActions;
         const { city, dropDownList, isFetching, filter, error } = this.props.getCity;
         const { length } = this.props.checkLenght;
-        console.log(length);
+        const { selectedCity } = this.props.selectedCity;
+
         return (
             <form className='form' onSubmit={this.handleSubmit}>
                 <div className={length ? 'form__input form__input_focus-error' : 'form__input'}>
                     <input
+                      ref={(input) => {
+                          inputData = input;
+                          if (input !== null && selectedCity !== '') {
+                              input.value = selectedCity;
+                              selectCity('');
+                          }
+                        }
+                      }
                       onChange={() => {
                           getCity(inputData.value);
                       }}
                       onBlur={() => {
-                          checkLenght(city.length === 0 && filter !== '');
+                          checkLenght(city.length === 0 && filter !== '' && !error);
                       }}
                       onFocus={() => {
                           checkLenght(false);
+                          if (inputData.value !== '') {
+                              inputData.select();
+                          }
                       }}
+
                       type='text'
                       placeholder='Начните ввод кода или названия'
-                      ref={(input) => {inputData = input}}
                     />
 
                     {
@@ -50,7 +62,12 @@ export default class Form extends React.Component {
 
                 </div>
                 <div className={(dropDownList && !length) ? 'form__list' : 'form__list form__list_display-none'}>
-                    <CityList city={city} cityLength={length} />
+                    <CityList
+                      city={city}
+                      cityLength={length}
+                      selectCity={selectCity}
+                      setCityActive={setCityActive}
+                    />
                 </div>
                 <div className={error ? 'form__error' : 'form__error form__error_display-none'}>
                     <span>Что-то пошло не так. Проверьте соединение с интернетом и попробуйте снова</span>
@@ -69,5 +86,7 @@ export default class Form extends React.Component {
 Form.propTypes = {
     pageActions: React.PropTypes.object.isRequired,
     getCity: React.PropTypes.object.isRequired,
-    checkLenght: React.PropTypes.object.isRequired
+    checkLenght: React.PropTypes.object.isRequired,
+    selectedCity: React.PropTypes.object.isRequired,
+    selectCity: React.PropTypes.object
 };

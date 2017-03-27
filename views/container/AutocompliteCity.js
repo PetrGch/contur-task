@@ -4,10 +4,10 @@ import Form from '../components/Form/From';
 import { bindActionCreators } from 'redux';
 
 const mapStateToProps = (state) => {
-    // console.log(state);
     return {
         getCity: state.getCity,
-        checkLenght: state.checkLenght
+        checkLenght: state.checkLenght,
+        selectedCity: state.selectCity
     }
 };
 

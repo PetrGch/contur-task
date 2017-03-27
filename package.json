@@ -36,6 +36,7 @@
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
     "css-loader": "^0.26.1",
+    "cssnano": "^3.10.0",
     "debug": "~2.6.0",
     "eslint": "3.7.0",
     "eslint-config-standard-jsx": "3.3.0",

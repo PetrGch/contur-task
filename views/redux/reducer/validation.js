@@ -7,7 +7,6 @@ const initialState = {
 export default function checkLenght(state = initialState, action ) {
     switch (action.type) {
         case CHACK_LENGTH:
-            console.log(action);
             return Object.assign({}, state, {
                 length: action.lenght
             });

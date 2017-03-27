@@ -6,11 +6,17 @@ import thunk from 'redux-thunk';
 export default function configureStore(initialState) {
     const logger = createLogger();
 
-    const store = createStore(
-        rootReducer,
-        initialState,
-        applyMiddleware(thunk, logger)
-    );
+    const store = NODE_ENV === 'production' ?
+        createStore(
+            rootReducer,
+            initialState,
+            applyMiddleware(thunk)
+        ) :
+        createStore(
+            rootReducer,
+            initialState,
+            applyMiddleware(thunk, logger)
+        );
 
     return store;
 }

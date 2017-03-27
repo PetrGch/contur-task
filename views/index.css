@@ -9,12 +9,12 @@
 
 @font-face {
     font-family: 'Conv_segoeui';
-    src: url('../public/source/fonts/segoeui/segoeui.eot');
+    src: url('source/fonts/segoeui/segoeui.eot');
     src:
         local('☺'),
-        url('../public/source/fonts/segoeui/segoeui.woff') format('woff'),
-        url('../public/source/fonts/segoeui/segoeui.ttf') format('truetype'),
-        url('../public/source/fonts/segoeui/segoeui.svg') format('svg');
+        url('source/fonts/segoeui/segoeui.woff') format('woff'),
+        url('source/fonts/segoeui/segoeui.ttf') format('truetype'),
+        url('source/fonts/segoeui/segoeui.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }

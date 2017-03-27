@@ -3,6 +3,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 function pathResolve(yourPath) {
     return path.resolve(__dirname, yourPath);
@@ -55,7 +56,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.pcss$/,
+                test: /\.css$/,
                 loader: ExtractTextPlugin.extract({ fallback: 'style', use: 'css?importLoaders=1!postcss-loader' })
             },
             {
@@ -69,10 +70,14 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(),
         new ExtractTextPlugin("[name].css"),
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            NODE_ENV: JSON.stringify(NODE_ENV)
+        }),
         new webpack.ProvidePlugin({
             ReactDOM:   'react-dom',
             React:      'react',
             PropTypes:  'react/lib/ReactPropTypes',
+            Component:  'react/lib/ReactComponent'
         })
     ],
 

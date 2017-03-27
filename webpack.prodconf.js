@@ -3,6 +3,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 function pathResolve(yourPath) {
     return path.resolve(__dirname, yourPath);
@@ -46,7 +48,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.pcss$/,
+                test: /\.css$/,
                 loader: ExtractTextPlugin.extract({ fallback: 'style', use: 'css?importLoaders=1!postcss-loader' })
             },
             {
@@ -57,6 +59,18 @@ module.exports = {
     },
 
     plugins: [
+        new ExtractTextPlugin("[name].css"),
+        new webpack.DefinePlugin({
+            NODE_ENV: JSON.stringify(NODE_ENV)
+        }),
+        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.ProvidePlugin({
+            ReactDOM:   'react-dom',
+            React:      'react',
+            PropTypes:  'react/lib/ReactPropTypes',
+            Component:  'react/lib/ReactComponent'
+        }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 properties: true,
@@ -70,13 +84,11 @@ module.exports = {
                 warnings: false,
             }
         }),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new ExtractTextPlugin("[name].css"),
-        new webpack.ProvidePlugin({
-            ReactDOM:   'react-dom',
-            React:      'react',
-            PropTypes:  'react/lib/ReactPropTypes',
+        new OptimizeCssAssetsPlugin({
+            assetNameRegExp: /\.css$/g,
+            cssProcessor: require('cssnano'),
+            cssProcessorOptions: { discardComments: { removeAll: true } },
+            canPrint: true
         }),
-        new webpack.optimize.OccurrenceOrderPlugin()
     ]
 };

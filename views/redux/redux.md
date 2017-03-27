@@ -8,6 +8,11 @@
     dropDownList: false,
     isFetching: false,
     filter: '',
-    error: false
+    error: false,
+    success: false,
+    
+    length: false,
+    
+    selectedCity: ''
 }
 ```

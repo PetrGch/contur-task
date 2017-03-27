@@ -6,13 +6,17 @@
         padding: 6px 6px 6px 10px;
         font-size: 14px;
         list-style: none;
-        transition: all .1s ease-in-out;
+        transition: all 0.1s ease-in-out;
         cursor: pointer;
 
-        &_active,
-        &:hover {
+        &_active, &:hover {
             background-color: $bluehover;
             color: $white;
+        }
+
+        &_selected, &_selected:hover {
+            background-color: $buttonbg;
+            color: $listText;
         }
     }
 
@@ -27,9 +31,7 @@
         &__item {
             display: block;
 
-            &_search,
-            &_notfound{
-
+            &_search, &_notfound {
                 &-none {
                     display: none;
                 }

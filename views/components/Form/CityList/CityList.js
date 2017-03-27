@@ -1,11 +1,14 @@
 export default class CityList extends React.Component {
     render() {
-        let { city, cityLength } = this.props;
+        let { city, cityLength, selectCity, setCityActive } = this.props;
 
         let citysList = city.map((item, index) => {
             return (
-                <li key={item.Id} className={index === 0 ? 'list__item list__item_active' : 'list__item'} >
-                    <span>{item.City}</span>
+                <li key={item.Id} className={item.active === 'active' ? 'list__item list__item_active' : (item.active === 'selected') ? 'list__item list__item_selected' : 'list__item'} >
+                    <span onClick={() => {
+                        selectCity(item.City);
+                        setCityActive(item.Id);
+                    }}>{item.City}</span>
                 </li>
             )
         });
@@ -36,5 +39,7 @@ export default class CityList extends React.Component {
 
 CityList.propTypes = {
    city: React.PropTypes.array.isRequired,
-   cityLength: React.PropTypes.bool.isRequired
+   cityLength: React.PropTypes.bool.isRequired,
+   selectCity: React.PropTypes.func,
+   setCityActive: React.PropTypes.func
 };
